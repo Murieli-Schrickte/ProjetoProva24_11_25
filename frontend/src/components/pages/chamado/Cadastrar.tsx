@@ -1,49 +1,32 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cadastro from '../../components/Cadastro';
 import axios from "axios";
+import { ReactFormState } from 'react-dom/client';
+import { METHODS } from 'http';
+import { URL } from 'url';
 
-const URL = "http://localhost:5273";
-
-function Cadastrar() {
+const Cadastrar = React.FC = () => {
     const [mensagem, setMensagem] = useState('');
-    const Navigate = useNavigate;
+    const navigate = useNavigate;
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setMensagem('');
 
-    function submeterForm(e: any) {
-    e.preventDefault();
-    enviarChamadoAPI();
-  }
+       
+        try {
+            const response = await fetch (`${URL}/api/chamado/cadastrar`),{
+            method: 'POST'},
+            headers: {
+             'Content-type' : 'application/json',
+            },
+            body: JSON
 
-  async function enviarChamadoAPI() {
-    try {
-      const Chamado: Chamado = { nome, id, status };
-      const resposta = await axios.post(
-        "http://localhost:5273/api/chamado/cadastrar",
-        Chamado
-      );
-      navigate("/");
-    } catch (error) {
-      console.log("Erro na requisição: " + error);
+            if (condition) {
+                
+            }
+        } catch (error) {
+            
+        }
     }
-}
-
-  return (
-    <div>
-      <h1>Cadastrar Chamado</h1>
-      <form onSubmit={submeterForm}>
-        <div>
-          <label>Nome:</label>
-          <input
-            type="text"
-            onChange={(e: any) => setNome(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Status:</label>
-          <input
-            type="text"
-            onChange={(e: any) => setStatus(e.target.value)}
-          />
-          );
 }
